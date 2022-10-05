@@ -4,18 +4,16 @@ import Card from '../Card'
 
 const Repos = () => {
 
-    const [userInput, setUserInput] = useState('')
     const [user, setUser] = useState('')
 
     const handleFormSubmit = (e) => {
         e.preventDefault()
-        setUser(userInput)
-        setUserInput('')
+        setUser('')
         console.log(user);
     }
 
     const handleInput = (e) => {
-        setUserInput(e.target.value)
+        setUser(e.target.value)
     }
 
     const [repos, setRepos] = useState([])
@@ -24,24 +22,24 @@ const Repos = () => {
 
         const fetchRepos = async () => {
             try {
-                const { data } = await axios.get(`https://api.github.com/users/jakerinahmed/repos`)
+                const { data } = await axios.get(`https://api.github.com/users/${user}/repos`)
                 let addRepos = [];
                 data.forEach(repos => {
                     addRepos.push(repos.name);
                 });
-                setRepos(prevState => [...prevState, addRepos]);
-                renderRepos();
+                setRepos(addRepos);
+                console.log(repos)
             } catch (error) {
                 console.log(error)
             }
         }
         fetchRepos()
-    }, [repos])
+    }, [user])
 
     const renderRepos = repos.map(repo => {
         return (
             <>
-                <Card name={repo[0]}></Card>
+                <Card name={repo}></Card>
             </>
         )
     })
@@ -56,7 +54,7 @@ const Repos = () => {
                     id='username'
                     name='username'
                     placeholder='Thats not my name'
-                    value={userInput}
+                    value={user}
                     onChange={handleInput}
                 />
                 <input type="submit" value='Update!' />

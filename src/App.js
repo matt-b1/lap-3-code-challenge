@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import './App.css';
 import {Header} from './Layout'
-import {Home, About } from './Pages'
+import {Home, About } from './pages'
 import {Repos} from './components'
 
 function App() {
