@@ -11,6 +11,7 @@ const Repos = () => {
         e.preventDefault()
         setUser(userInput)
         setUserInput('')
+        console.log(user);
     }
 
     const handleInput = (e) => {
@@ -24,24 +25,27 @@ const Repos = () => {
         const fetchRepos = async () => {
             try {
                 const { data } = await axios.get(`https://api.github.com/users/jakerinahmed/repos`)
-                console.log(data.forEach(repos => {console.log(repos.name)}
-                ))
-                setRepos(data.forEach(repos => console.log(repos.name)))
-                // console.log(data.forEach(repos => repos.name))
+                let addRepos = [];
+                data.forEach(repos => {
+                    addRepos.push(repos.name);
+                });
+                setRepos(prevState => [...prevState, addRepos]);
+                renderRepos();
             } catch (error) {
                 console.log(error)
             }
         }
         fetchRepos()
-    }, [user])
+    }, [repos])
 
-    const renderRepos = () => {
+    const renderRepos = repos.map(repo => {
         return (
             <>
-                <Card name={repos.name} />
+                <Card name={repo[0]}></Card>
             </>
         )
-    }
+    })
+
 
 
     return (
