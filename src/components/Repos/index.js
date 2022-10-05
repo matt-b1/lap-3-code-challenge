@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Card from '../Card'
+import './style.css'
 
 const Repos = () => {
 
@@ -27,10 +28,12 @@ const Repos = () => {
                     const { data } = await axios.get(`https://api.github.com/users/${user}/repos`)
                     let addRepos = [];
                     data.forEach(repos => {
-                        addRepos.push(repos.name);
+                        addRepos.push({name: repos.name, stargazers_count: repos.stargazers_count, forks: repos.forks})
+                        // stargazers.push(repos.stargazers_count)
+                        // forks.push(repos.forks);
                     });
                     setRepos(addRepos);
-                    console.log(repos)
+                    console.log(addRepos)
                 }
             } catch (error) {
                 console.log(error)
@@ -39,18 +42,17 @@ const Repos = () => {
         fetchRepos()
     }, [user])
 
+    
     const renderRepos = repos.map(repo => {
         return (
             <>
-                <Card name={repo}></Card>
+                <Card name={repo.name} stargazers_count={repo.stargazers_count} forks={repo.forks} ></Card>
             </>
         )
     })
 
-
-
     return (
-        <>
+        <div>
             <form onSubmit={handleFormSubmit}>
                 <input
                     type="text"
@@ -60,10 +62,10 @@ const Repos = () => {
                     value={formInput}
                     onChange={handleInput}
                 />
-                <input type="submit" value='Update!' />
+                <input type="submit" value='Search!' />
             </form>
             {renderRepos}
-        </>
+        </div>
     )
 }
 
