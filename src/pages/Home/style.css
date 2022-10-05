@@ -1,0 +1,12 @@
+h1 {
+    color: purple;
+    font-weight: bold;
+    font-size: 100px;
+}
+
+.Welcome {
+    height: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
