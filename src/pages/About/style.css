@@ -1,0 +1,9 @@
+.about {
+    padding: 20px;
+    align-items: center;
+}
+
+h2, p {
+    font-size: xx-large;
+    color: purple;
+}
