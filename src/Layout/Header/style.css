@@ -1,0 +1,19 @@
+.current {
+    background-color: white;
+    text-decoration: none;
+    color: lightblue
+}
+
+ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: lightblue;
+    height: 15vh;
+    padding: 25px
+}
+
+.notActive {
+    color: black;
+    text-decoration: none;
+}
